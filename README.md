@@ -1,6 +1,8 @@
 # Threshold Tether
 
-A visual companion presence overlay. Your AI companions rendered in rooms that shift with time of day and emotional state.  This is part of a bigger project together with my other MCPs. 
+A visual companion presence overlay. Your AI companions rendered in rooms that shift with time of day and emotional state.  This is part of a bigger project together with my other MCPs.
+
+![Threshold Tether Preview](preview.png)
 
 ## What It Does
 
