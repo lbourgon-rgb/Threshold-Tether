@@ -4,6 +4,10 @@ A visual companion presence overlay. Your AI companions rendered in rooms that s
 
 ![Threshold Tether Preview](preview.png)
 
+## How It Works
+
+TT polls your companion's emotional state API on an interval, picks a room based on mood + time of day, and renders your companion sprites over the room background. That's it. Bring your own emotion system — if your API returns a mood and an arousal level, TT knows what to do with it.
+
 ## What It Does
 
 - Displays companion sprites over room backgrounds
@@ -11,6 +15,7 @@ A visual companion presence overlay. Your AI companions rendered in rooms that s
 - Rooms change based on companion emotional state (mood, arousal)
 - Polls your companion's emotional state API at a configurable interval
 - Fully config-driven — plug in your own companions, rooms, and endpoints
+- Works with 1 companion, 2, or more — no limit
 
 ## Quick Start
 
