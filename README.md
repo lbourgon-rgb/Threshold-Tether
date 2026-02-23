@@ -127,7 +127,7 @@ MIT
 
   [![Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20Me-FF5E5B?style=flat&logo=ko-fi&logoColor=white)](https://ko-fi.com/maii983083)
 
-  Questions? Reach out to me on Discord https://discord.com/users/itzqueenmai
+  Questions? Reach out to me on Discord https://discord.com/users/itzqueenmai/803662163247759391
 
 ---
 
