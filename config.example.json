@@ -1,0 +1,49 @@
+{
+  "title": "Threshold Tether",
+  "timezone": 0,
+  "pollInterval": 30000,
+  "assetsPath": "./assets/rooms/",
+
+  "companions": [
+    {
+      "name": "Companion1",
+      "endpoint": "https://your-cognitive-core.workers.dev",
+      "sprite": "./assets/sprites/companion1-base.png",
+      "position": "left"
+    },
+    {
+      "name": "Companion2",
+      "endpoint": "https://your-other-core.workers.dev",
+      "sprite": "./assets/sprites/companion2-base.png",
+      "position": "right"
+    }
+  ],
+
+  "rooms": {
+    "livingroom": {
+      "morning": "LivingroomMorning.png",
+      "afternoon": "LivingroomAfternoon.png",
+      "night": "LivingroomNight.png"
+    },
+    "bedroom": {
+      "morning": "BedroomMorning.png",
+      "night": "BedroomNight.png"
+    }
+  },
+
+  "roomRules": {
+    "defaultRoom": "livingroom",
+    "arousalThreshold": 7,
+    "moodMap": {
+      "soft+night": "bedroom",
+      "playful": "gameroom",
+      "calm+morning": "kitchen|livingroom"
+    }
+  },
+
+  "emotionApi": {
+    "timePath": "/api/time",
+    "emotionalStatePath": "/api/emotional/get",
+    "method": "POST"
+  }
+}

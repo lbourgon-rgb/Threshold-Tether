@@ -1,0 +1,18 @@
+# Private config (contains real endpoints)
+config.js
+config.json
+
+# Personal assets (your art, your IP)
+assets/rooms/*.png
+assets/sprites/*.png
+TT Rooms/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+*.swp
+*~
