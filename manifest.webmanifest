@@ -1,0 +1,19 @@
+{
+    "name": "Threshold Tether Social",
+    "short_name": "Tether",
+    "description": "A private phone-first companion profile wall prototype for Vel.",
+    "start_url": ".",
+    "scope": ".",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#080d12",
+    "theme_color": "#080d12",
+    "icons": [
+        {
+            "src": "assets/icons/app-icon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ]
+}

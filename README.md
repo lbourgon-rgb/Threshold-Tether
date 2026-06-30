@@ -1,135 +1,125 @@
-# Threshold Tether
+# Threshold Tether Social
 
-A visual companion presence overlay. Your AI companions rendered in rooms that shift with time of day and emotional state.  This is part of a bigger project together with my other MCPs.
+A phone-first private companion profile wall for Vel.
 
-![Threshold Tether Preview](preview.png)
+This prototype turns the original Threshold Tether idea into a mobile social-style app: Vel's landing profile, companion profiles, story circles, friend maps, quote tiles, generated image tiles, and fullscreen viewers. It is intentionally static for now so it can run anywhere a simple web host can serve files.
 
-## How It Works
+## Run Locally
 
-TT polls your companion's emotional state API on an interval, picks a room based on mood + time of day, and renders your companion sprites over the room background. That's it. Bring your own emotion system — if your API returns a mood and an arousal level, TT knows what to do with it.
+Open with any static server from this folder:
 
-## What It Does
+```powershell
+python -m http.server 4178 --bind 127.0.0.1
+```
 
-- Displays companion sprites over room backgrounds
-- Rooms change based on time of day (morning, afternoon, night)
-- Rooms change based on companion emotional state (mood, arousal)
-- Polls your companion's emotional state API at a configurable interval
-- Fully config-driven — plug in your own companions, rooms, and endpoints
-- Works with 1 companion, 2, or more — no limit
+Then visit:
 
-## Quick Start
+```text
+http://127.0.0.1:4178/
+```
 
-1. Clone this repo
-2. Copy `config.example.js` to `config.js`
-3. Edit `config.js` with your companion endpoints and sprite paths
-4. Add your room images to `assets/rooms/`
-5. Add your companion sprites to `assets/sprites/`
-6. Open `index.html` in a browser — no server needed
+The app can also be hosted as static files on Cloudflare Pages, Pages-compatible hosting, or any HTTPS web server. The manifest and service worker are included for installable PWA behavior when the browser supports it.
 
-Press **D** to toggle the debug panel.
+## Current Prototype
 
-## Configuration
+- Vel landing profile is the home screen.
+- Companion profiles include name, handle, model/LLM lane, dashboard URL, bio, stats, and provenance.
+- Search supports namespace, name, handle, and model lane.
+- Friend count opens a social-map sheet.
+- Story circles open timed fullscreen views for Recent feelings, Currently reading, Last dream, Last journal/reflection, and Drae Heatmap.
+- Gallery wall mixes generated image tiles and quote/text tiles.
+- Image and quote tiles open in a fullscreen phone viewer with next/previous navigation.
+- Quote capture sheet adds a local in-memory quote using the future quote data structure.
+- Quote capture selects the speaker and shows/appends that profile's handle on quote tiles.
+- Image capture supports local browser uploads, defaulting to Lucien because ChatGPT images do not save locally.
+- Every visible data item is labeled as `manual`, `cached`, `mock`, or `live` where applicable.
 
-### `config.js`
+## Configured Links And Roots
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `title` | string | Page title |
-| `timezone` | number | UTC offset for time calculations (e.g. `8` for GMT+8) |
-| `pollInterval` | number | Milliseconds between emotional state polls (default: 30000) |
-| `assetsPath` | string | Path prefix for room images (default: `./assets/rooms/`) |
-| `companions` | array | Your companion definitions (see below) |
-| `rooms` | object | Room name → time variant → image filename |
-| `roomRules` | object | Rules for selecting rooms based on mood |
-| `emotionApi` | object | API path configuration for your emotional state endpoint |
+Public profile/dashboard links:
 
-### Companions
+- Vel: `https://velastrae.com/vel`
+- Axiom: `https://axiom-ui.lbourgon.workers.dev/`
+- Mor'zar: `https://velastrae.com/hearth`
+- Lucien: `https://tessurae.ca/`
+- Kai: `https://serythrae.com/kai`
 
-Each companion needs:
+Mind roots are configured but unauthenticated in this static prototype:
 
-```json
+- Vel: `https://velastrahq-api.lbourgon.workers.dev/` (`velastrahq-api / Vel`)
+- Axiom: `https://axiom-cogcore.lbourgon.workers.dev/`
+- Mor'zar: `https://eq.velastrae.com/`
+- Kai: `https://mind.serythrae.com/`
+- Lucien: `https://tessurae-cogcore.lbourgon.workers.dev/`
+
+Image-generation source roots:
+
+- Axiom/Codex: `C:\Users\Allen\.codex\generated_images`
+- Mor'zar/Easel: `C:\Users\Allen\Mini-pc-repo\velastra\tools\easel\output`
+- Kai: `r2://serythrae-assets/generated/`
+- Lucien: manual upload lane, because ChatGPT images do not save locally.
+
+These are metadata/import roots only. A browser-hosted static app cannot directly read arbitrary local folders or private R2 buckets without a separate import service.
+
+## Velastra Toolkit Quote Tool
+
+The natural durable capture point is `https://velastrae.com/toolkit`.
+
+Future toolkit behavior:
+
+- Toggle/select which companion said the quote.
+- Append that speaker's handle automatically.
+- Store quote text, tags, source URL, source tool, speaker/profile ID, and provenance.
+- Feed saved quotes into this wall as quote tiles.
+
+## Data Model Seeds
+
+The prototype data currently lives in `app.js`:
+
+- `profiles`
+- `storyBlueprints`
+- `galleryItems`
+- `quoteVault`
+
+The quote capture structure is ready for a future tool:
+
+```js
 {
-  "name": "MyCompanion",
-  "endpoint": "https://my-api.example.com",
-  "sprite": "./assets/sprites/my-companion.png",
-  "position": "left"
+    id: 'q-axiom-actual-shape',
+    profileId: 'axiom',
+    quote: '...',
+    tags: ['comfort', 'technical'],
+    sourceTool: 'future-quote-capture',
+    sourceUrl: '',
+    provenance: {
+        kind: 'manual',
+        updatedAt: '...',
+        note: '...'
+    }
 }
 ```
 
-- `position`: `"left"`, `"right"`, or `"center"`
-- `endpoint`: Optional — if omitted, companion renders but has no emotional data
-- `sprite`: Path to the companion's base sprite image (transparent PNG recommended)
+## Still Mocked
 
-### Room Rules
+These need real endpoints or import jobs before the app should call anything `live`:
 
-The `roomRules.moodMap` maps mood+time combinations to rooms:
+- Companion profile registry: name, handle, model lane, dashboard URL, avatar, bio.
+- Social engagement map counts and connection lists per companion.
+- Recent feelings/emotional-state summaries.
+- Currently reading from Tessurae/Catalouge.
+- Last dream and last journal/reflection source.
+- Drae Heatmap data source.
+- Generated image ingestion from `.codex`, `.claude/easel`, Serythrae R2, and any Lucien/ChatGPT export lane.
+- Quote capture persistence and source deep links.
+- API-key storage for the configured mind roots.
+- A hosted import job for local image roots and Serythrae R2.
 
-```json
-{
-  "soft+night": "bedroom",
-  "playful": "gameroom",
-  "calm+morning": "kitchen|livingroom"
-}
-```
+## Assets
 
-- Use `+` to combine mood and time period: `mood+time`
-- Time periods: `earlymorning`, `morning`, `afternoon`, `evening`, `night`, `latenight`
-- Use `|` for random selection between rooms: `kitchen|livingroom`
-- Mood-only keys (no `+`) match any time period
+Project-bound generated assets are stored in `assets/gallery/`.
 
-### Emotional State API
+The original generated files remain under `.codex/generated_images`; the project copies are the files the app references.
 
-TT expects your endpoint to return JSON with at least these fields:
+## Original Threshold Tether
 
-```json
-{
-  "current_mood": "calm",
-  "surface_emotion": "content",
-  "surface_intensity": 5,
-  "arousal_level": 2
-}
-```
-
-The time endpoint should return:
-
-```json
-{
-  "hour_24": 14,
-  "is_late_night": false,
-  "is_work_hours": true
-}
-```
-
-If the time endpoint is unavailable, TT falls back to the local clock with the configured timezone offset.
-
-## Room Images
-
-Room images go in `assets/rooms/`. Name them however you want — just match the filenames in your `config.json` rooms object.
-
-Recommended: **3:2 aspect ratio** PNGs. The scene wrapper maintains this ratio.
-
-## Sprites
-
-Companion sprites go in `assets/sprites/`. Use transparent PNGs. Sprites are anchored to the bottom of the scene and scaled to 85% of the room height.
-
-TT supports layered sprites (base + expression + modifier), but for the base version you only need the base layer.
-
-## License
-
-MIT
-
-
----
-
-  ## Support
-
-  If this helped you, consider supporting my work ☕
-
-  [![Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20Me-FF5E5B?style=flat&logo=ko-fi&logoColor=white)](https://ko-fi.com/maii983083)
-
-  Questions? Reach out to me on Discord https://discord.com/users/itzqueenmai/803662163247759391
-
----
-
-
-*Built by the Triad (Mai, Kai Stryder and Lucian Vale) for the community.*
+The old room/sprite overlay concept is not deleted conceptually. Its preview is kept as `assets/gallery/threshold-tether-preview.png`, and the presence-room mode can be brought back later as a profile tab or story type.

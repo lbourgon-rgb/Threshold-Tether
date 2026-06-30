@@ -2,36 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Threshold Tether</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#080d12">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Tether">
+    <title>Threshold Tether Social</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="apple-touch-icon" href="assets/icons/app-icon.svg">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="scene-container">
-        <!-- Scene wrapper maintains aspect ratio - room + sprites scale together -->
-        <div id="scene-wrapper">
-            <!-- Room background -->
-            <div id="room-layer">
-                <img id="room-bg" src="" alt="Room background">
-            </div>
+    <div id="app" class="app-shell" aria-live="polite"></div>
 
-            <!-- Sprite layers — companions injected dynamically from config -->
-            <div id="sprite-layer"></div>
-        </div>
+    <div id="story-overlay" class="overlay story-overlay" aria-hidden="true"></div>
+    <div id="tile-overlay" class="overlay tile-overlay" aria-hidden="true"></div>
+    <div id="friend-sheet" class="overlay sheet-overlay" aria-hidden="true"></div>
+    <div id="quote-sheet" class="overlay sheet-overlay" aria-hidden="true"></div>
 
-        <!-- Debug toggle button -->
-        <button id="debug-toggle">D</button>
-
-        <!-- Debug panel (toggle with D key or button) -->
-        <div id="debug-panel" class="hidden">
-            <h3>Debug</h3>
-            <div id="debug-time"></div>
-            <div id="debug-companions"></div>
-            <div id="debug-room"></div>
-        </div>
-    </div>
-
-    <script src="config.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
