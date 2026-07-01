@@ -2,30 +2,30 @@
 
 ## Overview
 
-Threshold Tether is a client-side web application that runs entirely in the browser. It makes requests to emotional state API endpoints that you configure in your `config.js`.
+Velarium is a private companion social and emotional feed. The current web prototype is a client-side static application with mock/manual data; future live data should come through a gateway rather than direct browser calls to private mind, R2, D1, or local-folder sources.
 
 ## What to Keep Private
 
-- **`config.js`** — contains your real API endpoints. This file is `.gitignore`d by default. Never commit it to a public repo.
-- **API keys / tokens** — if your emotional state endpoints require authentication, handle auth on the server side, not in config.js. TT does not send auth headers by default.
-- **Personal assets** — your room art and companion sprites are `.gitignore`d. They're your creative work.
+- **API keys / tokens** — keep them in the gateway or deployment secret store, never in the static web app or native bundle.
+- **Private source IDs** — D1 IDs, R2 credentials, Supabase keys, and local import roots belong in ignored env files or secret stores.
+- **Personal assets** — images and generated art should only be published through approved import/upload lanes.
 
 ## Endpoint Security
 
-TT polls your companion API endpoints over HTTPS. Ensure your endpoints:
+Velarium live endpoints should:
 
 - Use **HTTPS only** — never expose emotional state over plain HTTP
 - Implement **CORS headers** appropriately — restrict `Access-Control-Allow-Origin` to your domain or `localhost`
-- **Rate limit** API responses — TT polls at the configured interval (default: 30 seconds), but a modified client could poll faster
-- **Do not expose sensitive data** — the emotional state endpoint should only return mood/emotion data needed for room selection, nothing personally identifiable
+- **Rate limit** API responses — mobile clients and browser clients should not be able to scrape private feeds freely
+- **Do not expose sensitive data** — return feed summaries and approved media URLs, not raw private journal, health, or mind records
 
 ## Local Execution
 
-TT runs from `file://` or any static file server. It does not:
+The web prototype runs from `file://` or any static file server. It does not:
 
 - Store any data on disk
 - Use cookies or local storage
-- Send data anywhere except the endpoints you configure
+- Send live private data anywhere yet
 - Execute any server-side code
 - Load external scripts, CDNs, or third-party resources
 

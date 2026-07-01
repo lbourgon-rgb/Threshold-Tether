@@ -1,7 +1,7 @@
 {
-    "name": "Threshold Tether Social",
-    "short_name": "Tether",
-    "description": "A private phone-first companion profile wall prototype for Vel.",
+    "name": "Velarium",
+    "short_name": "Velarium",
+    "description": "A private phone-first companion social and emotional feed for Vel.",
     "start_url": ".",
     "scope": ".",
     "display": "standalone",

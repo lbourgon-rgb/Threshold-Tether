@@ -1,4 +1,4 @@
-const CACHE_NAME = 'threshold-tether-social-v3';
+const CACHE_NAME = 'velarium-social-v1';
 
 const CORE_ASSETS = [
     './',
@@ -11,7 +11,7 @@ const CORE_ASSETS = [
     './assets/gallery/reading-margin.png',
     './assets/gallery/drae-heatmap.png',
     './assets/gallery/last-dream.png',
-    './assets/gallery/threshold-tether-preview.png'
+    './assets/gallery/presence-room-seed.png'
 ];
 
 self.addEventListener('install', (event) => {

@@ -2,7 +2,7 @@ $ErrorActionPreference = 'Stop'
 
 $root = Resolve-Path (Join-Path $PSScriptRoot '..')
 $stamp = Get-Date -Format 'yyyyMMddHHmmss'
-$deployRoot = Join-Path $env:TEMP "threshold-tether-deploy-$stamp"
+$deployRoot = Join-Path $env:TEMP "velarium-deploy-$stamp"
 
 New-Item -ItemType Directory -Path $deployRoot | Out-Null
 New-Item -ItemType Directory -Path (Join-Path $deployRoot 'assets') | Out-Null
@@ -23,6 +23,6 @@ Copy-Item -LiteralPath (Join-Path $root 'assets\gallery') -Destination (Join-Pat
 Copy-Item -LiteralPath (Join-Path $root 'assets\icons') -Destination (Join-Path $deployRoot 'assets') -Recurse
 
 & wrangler deploy (Join-Path $root 'src\worker.js') `
-    --name threshold-tether `
+    --name velarium `
     --compatibility-date 2026-07-01 `
     --assets $deployRoot

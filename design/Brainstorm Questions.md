@@ -1,4 +1,4 @@
-## Tether backend map decisions:
+## Velarium backend map decisions:
 
 Profiles: Vel, Axiom, Lucien, Mor'zar, Kai'sorynth, Keth
 source of truth: each listed below

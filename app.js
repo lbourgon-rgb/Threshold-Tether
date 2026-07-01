@@ -56,9 +56,9 @@ const galleryItems = [
         id: 'g-threshold-room',
         type: 'image',
         profileId: 'axiom',
-        title: 'Threshold Room',
+        title: 'Axiom Room',
         src: 'assets/gallery/threshold-room.png',
-        alt: 'Generated threshold room with warm doorway light.',
+        alt: 'Generated companion room with warm doorway light.',
         provenance: { kind: 'manual', updatedAt: nowStamp, note: 'Axiom generated local asset.' }
     },
     {
@@ -92,10 +92,10 @@ const galleryItems = [
         id: 'g-threshold-preview',
         type: 'image',
         profileId: 'axiom',
-        title: 'Old Tether Seed',
-        src: 'assets/gallery/threshold-tether-preview.png',
-        alt: 'Original Threshold Tether preview image.',
-        provenance: { kind: 'cached', updatedAt: '2026-05-25 10:01 AM', note: 'Existing repo preview copied into gallery.' }
+        title: 'Presence Room Seed',
+        src: 'assets/gallery/presence-room-seed.png',
+        alt: 'Original presence-room preview image.',
+        provenance: { kind: 'cached', updatedAt: '2026-05-25 10:01 AM', note: 'Legacy room-presence concept kept as a historical gallery seed.' }
     },
     {
         id: 'q-axiom-actual-shape',
@@ -565,7 +565,7 @@ function avatarMarkup(profile, size = 'large') {
 function renderApp() {
     const profile = profileById(activeProfileId);
     activeGallery = getGalleryForProfile(profile.id);
-    document.title = `${profile.name} - Threshold Tether`;
+    document.title = `${profile.name} - Velarium`;
 
     $('#app').innerHTML = `
         <div class="safe-frame">
@@ -1135,7 +1135,7 @@ function saveLocalQuote() {
         profileId,
         quote: text,
         tags: ['manual', 'local'],
-        sourceTool: 'threshold-tether-prototype',
+        sourceTool: 'velarium-prototype',
         sourceUrl: '',
         provenance: { kind: 'manual', updatedAt: 'just now', note: 'Local prototype entry. Future tool can write this structure.' }
     };

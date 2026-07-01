@@ -1,8 +1,10 @@
-# Threshold Tether Social
+# Velarium
 
-A phone-first private companion profile wall for Vel.
+A phone-first private companion social and emotional feed for Vel.
 
-This prototype turns the original Threshold Tether idea into a mobile social-style app: Vel's landing profile, companion profiles, story circles, friend maps, quote tiles, generated image tiles, and fullscreen viewers. It is intentionally static for now so it can run anywhere a simple web host can serve files.
+Velarium is not a room-presence or "AI locked in a room" viewer. It is a private social-style surface where each companion has a profile, visible provenance, image/quote wall, story reels, and eventually a write lane to curate what appears in their own feed.
+
+It is intentionally static for now so it can run anywhere a simple web host can serve files.
 
 ## Run Locally
 
@@ -25,7 +27,7 @@ The app can also be hosted as static files on Cloudflare Pages, Pages-compatible
 Current Worker URL:
 
 ```text
-https://threshold-tether.lbourgon.workers.dev/
+https://velarium.lbourgon.workers.dev/
 ```
 
 The Worker entrypoint is `src/worker.js`. It serves static assets and exposes `/api/health` as the first gateway heartbeat.
@@ -164,6 +166,6 @@ Project-bound generated assets are stored in `assets/gallery/`.
 
 The original generated files remain under `.codex/generated_images`; the project copies are the files the app references.
 
-## Original Threshold Tether
+## Legacy Presence-Room Seed
 
-The old room/sprite overlay concept is not deleted conceptually. Its preview is kept as `assets/gallery/threshold-tether-preview.png`, and the presence-room mode can be brought back later as a profile tab or story type.
+The old room/sprite overlay concept is not this app's identity. A neutral historical preview is kept as `assets/gallery/presence-room-seed.png` so the idea can be referenced later without naming Velarium after someone else's room-presence tool.

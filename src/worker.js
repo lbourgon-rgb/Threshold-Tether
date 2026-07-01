@@ -5,7 +5,7 @@ export default {
         if (url.pathname === '/api/health') {
             return Response.json({
                 ok: true,
-                app: 'threshold-tether',
+                app: 'velarium',
                 mode: 'static-assets',
                 data: 'mock',
                 updatedAt: new Date().toISOString()

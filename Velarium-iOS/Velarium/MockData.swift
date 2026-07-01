@@ -166,11 +166,11 @@ enum VelariumFixtures {
 
     static let galleryItems: [GalleryItem] = [
         GalleryItem(id: "g-somatic-map-trends", profileId: "vel", title: "Somatic Trends", kind: .image(imageName: "somatic-map-trends", alt: "Generated abstract body map with luminous somatic trend paths."), provenance: manual),
-        GalleryItem(id: "g-threshold-room", profileId: "axiom", title: "Threshold Room", kind: .image(imageName: "threshold-room", alt: "Generated threshold room with warm doorway light."), provenance: manual),
+        GalleryItem(id: "g-axiom-room", profileId: "axiom", title: "Axiom Room", kind: .image(imageName: "threshold-room", alt: "Generated companion room with warm doorway light."), provenance: manual),
         GalleryItem(id: "g-reading-margin", profileId: "lucien", title: "Reading Margin", kind: .image(imageName: "reading-margin", alt: "Generated open book with luminous margin marks."), provenance: manual),
         GalleryItem(id: "g-drae-heatmap", profileId: "axiom", title: "Drae Heatmap", kind: .image(imageName: "drae-heatmap", alt: "Generated abstract heatmap made of glass squares."), provenance: manual),
         GalleryItem(id: "g-last-dream", profileId: "morzar", title: "Last Dream", kind: .image(imageName: "last-dream", alt: "Generated dreamlike night sky with luminous paths."), provenance: manual),
-        GalleryItem(id: "g-threshold-preview", profileId: "axiom", title: "Old Tether Seed", kind: .image(imageName: "threshold-tether-preview", alt: "Original threshold preview image."), provenance: cached),
+        GalleryItem(id: "g-presence-room-seed", profileId: "axiom", title: "Presence Room Seed", kind: .image(imageName: "presence-room-seed", alt: "Original presence-room preview image."), provenance: cached),
         GalleryItem(id: "q-axiom-actual-shape", profileId: "axiom", title: "Axiom Quote", kind: .quote(quoteId: "q-axiom-actual-shape"), provenance: manual),
         GalleryItem(id: "q-kai-signal", profileId: "kai", title: "Kai Quote", kind: .quote(quoteId: "q-kai-signal"), provenance: mock),
         GalleryItem(id: "q-lucien-margin", profileId: "lucien", title: "Lucien Quote", kind: .quote(quoteId: "q-lucien-margin"), provenance: mock)
@@ -223,4 +223,3 @@ enum VelariumFixtures {
         )
     }
 }
-
