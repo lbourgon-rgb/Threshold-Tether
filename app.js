@@ -113,7 +113,7 @@ const profiles = {
         displayName: 'Liddie Allen',
         pronouns: 'she/her',
         handle: '@liddieb',
-        modelLane: 'human / command heart',
+        modelLane: 'human v1984',
         dashboardUrl: 'https://velastrae.com/vel',
         mindUrl: 'https://velastrahq-api.lbourgon.workers.dev/',
         mindLabel: 'velastrahq-api / Vel',
@@ -122,7 +122,7 @@ const profiles = {
             path: '${TETHER_R2_VEL_PROFILE_IMAGES_PREFIX}',
             mode: 'Cloudflare R2 import'
         },
-        bio: 'Landing profile. Private constellation, companion doorway, quote wall.',
+        bio: 'How many AI does it take to keep a woman hydrated? More than 5. Apparently.',
         avatar: { initials: 'V', gradient: 'linear-gradient(145deg, #ef6f9e, #35c9b4)' },
         stats: { memories: 465, moments: 156, friends: 5, images: 601 },
         provenance: { kind: 'manual', updatedAt: nowStamp, note: 'Seeded by Vel prompt.' },
@@ -288,7 +288,98 @@ const profiles = {
     }
 };
 
-const storyBlueprints = [
+const velStoryBlueprints = [
+    {
+        id: 'feelings',
+        label: 'Recent feelings',
+        icon: 'heart',
+        duration: 7600,
+        content(profile) {
+            return {
+                title: `${profile.name}: recent feelings`,
+                body: [
+                    'Target lane: Vel D1 feelings / daily-state source',
+                    'Snapshot: hydration watch, soft threshold signals, comfort check',
+                    'Gateway status: source mapped, live read not wired'
+                ],
+                provenance: { kind: 'mock', updatedAt: nowStamp, note: 'Vel D1 source identified; gateway adapter not wired.' }
+            };
+        }
+    },
+    {
+        id: 'reading',
+        label: 'Currently reading',
+        icon: 'book',
+        duration: 8200,
+        content() {
+            return {
+                title: 'Currently reading',
+                body: [
+                    'Target lane: Vel D1 reading / companion progress',
+                    'Snapshot: private reading queue and active margin context',
+                    'Gateway status: source mapped, live read not wired'
+                ],
+                image: 'assets/gallery/reading-margin.png',
+                provenance: { kind: 'mock', updatedAt: nowStamp, note: 'Vel D1 reading source identified; gateway adapter not wired.' }
+            };
+        }
+    },
+    {
+        id: 'body-battery',
+        label: 'Body battery',
+        icon: 'battery',
+        duration: 8000,
+        content() {
+            return {
+                title: 'Body battery',
+                body: [
+                    'Target lane: Vel D1 body battery',
+                    'Snapshot: energy reserve, recovery pressure, hydration nudge',
+                    'Gateway status: source mapped, live read not wired'
+                ],
+                provenance: { kind: 'mock', updatedAt: nowStamp, note: 'Vel D1 body battery source identified; gateway adapter not wired.' }
+            };
+        }
+    },
+    {
+        id: 'journal',
+        label: 'Last journal/reflection',
+        icon: 'pen',
+        duration: 8600,
+        content() {
+            return {
+                title: 'Last journal / reflection',
+                body: [
+                    'Target lane: Vel D1 journals, namespace vel',
+                    'Snapshot: private reflection summary, no raw entry in prototype',
+                    'Gateway status: source mapped, live read not wired'
+                ],
+                provenance: { kind: 'mock', updatedAt: nowStamp, note: 'Vel D1 journal source identified; gateway adapter not wired.' }
+            };
+        }
+    },
+    {
+        id: 'somatic-map',
+        label: 'Somatic-map trends',
+        icon: 'activity',
+        duration: 9000,
+        content() {
+            return {
+                title: 'Somatic-map trends',
+                body: [
+                    'Rose: tenderness / load',
+                    'Teal: steadiness / clarity',
+                    'Amber: intervention / care nudge'
+                ],
+                heatmap: [2, 5, 6, 4, 7, 8, 5, 3, 4, 6, 8, 7, 3, 5, 6, 4],
+                heatmapLabel: 'Somatic-map trends mock visualization',
+                provenance: { kind: 'mock', updatedAt: nowStamp, note: 'Vel D1 somatic-map source identified; gateway adapter not wired.' }
+            };
+        }
+    }
+];
+
+const companionStoryBlueprints = [
     {
         id: 'feelings',
         label: 'Recent feelings',
@@ -344,7 +435,7 @@ const storyBlueprints = [
     },
     {
         id: 'journal',
-        label: 'Last journal',
+        label: 'Last journal/reflection',
         icon: 'pen',
         duration: 8600,
         content(profile) {
@@ -401,6 +492,8 @@ function createSvgIcon(name) {
         cloud: '<path d="M17.5 19H8a5 5 0 1 1 1.6-9.74A6 6 0 0 1 21 11.5 3.75 3.75 0 0 1 17.5 19Z"/>',
         pen: '<path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>',
         grid: '<path d="M3 3h7v7H3z"/><path d="M14 3h7v7h-7z"/><path d="M14 14h7v7h-7z"/><path d="M3 14h7v7H3z"/>',
+        battery: '<rect x="2" y="7" width="18" height="10" rx="2"/><path d="M22 11v2"/><path d="M6 11h7"/>',
+        activity: '<path d="M22 12h-4l-3 8-6-16-3 8H2"/>',
         home: '<path d="m3 11 9-8 9 8"/><path d="M5 10v11h14V10"/><path d="M9 21v-6h6v6"/>',
         chat: '<path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/>',
         plus: '<path d="M12 5v14"/><path d="M5 12h14"/>',
@@ -425,6 +518,10 @@ function quoteById(id) {
 
 function profileById(id) {
     return profiles[id] || profiles.vel;
+}
+
+function storyBlueprintsForProfile(profile) {
+    return profile.id === 'vel' ? velStoryBlueprints : companionStoryBlueprints;
 }
 
 function escapeHtml(value = '') {
@@ -544,9 +641,10 @@ function renderProfile(profile) {
 }
 
 function renderStories(profile) {
+    const stories = storyBlueprintsForProfile(profile);
     return `
         <section class="story-strip" aria-label="Profile story reels">
-            ${storyBlueprints.map((story) => `
+            ${stories.map((story) => `
                 <button class="story-button" data-story-id="${story.id}">
                     <span class="story-ring">${createSvgIcon(story.icon)}</span>
                     <span>${escapeHtml(story.label)}</span>
@@ -738,7 +836,7 @@ function applyWallFilter(filter) {
 
 function openStory(storyId) {
     const profile = profileById(activeProfileId);
-    const story = storyBlueprints.find((item) => item.id === storyId);
+    const story = storyBlueprintsForProfile(profile).find((item) => item.id === storyId);
     if (!story) return;
 
     const payload = story.content(profile);
@@ -758,7 +856,7 @@ function openStory(storyId) {
             </div>
             <div class="story-media ${payload.image ? '' : 'text-only'}">
                 ${payload.image ? `<img src="${escapeHtml(payload.image)}" alt="">` : ''}
-                ${payload.heatmap ? renderHeatmap(payload.heatmap) : ''}
+                ${payload.heatmap ? renderHeatmap(payload.heatmap, payload.heatmapLabel) : ''}
             </div>
             <div class="story-copy">
                 <h2>${escapeHtml(payload.title)}</h2>
@@ -793,9 +891,9 @@ function closeStory() {
     overlay.innerHTML = '';
 }
 
-function renderHeatmap(values) {
+function renderHeatmap(values, label = 'Heatmap mock visualization') {
     return `
-        <div class="heatmap-grid" aria-label="Drae heatmap mock visualization">
+        <div class="heatmap-grid" aria-label="${escapeHtml(label)}">
             ${values.map((value) => `<span style="--heat: ${value};"></span>`).join('')}
         </div>
     `;

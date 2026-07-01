@@ -26,7 +26,7 @@ The app can also be hosted as static files on Cloudflare Pages, Pages-compatible
 - Companion profiles include name, handle, model/LLM lane, dashboard URL, bio, stats, and provenance.
 - Search supports namespace, name, handle, and model lane.
 - Friend count opens a social-map sheet.
-- Story circles open timed fullscreen views for Recent feelings, Currently reading, Last dream, Last journal/reflection, and Drae Heatmap.
+- Story circles open timed fullscreen views; Vel uses Recent feelings, Currently reading, Body battery, Last journal/reflection, and Somatic-map trends, while companions keep the dream/Drae set.
 - Gallery wall mixes generated image tiles and quote/text tiles.
 - Image and quote tiles open in a fullscreen phone viewer with next/previous navigation.
 - Quote capture sheet adds a local in-memory quote using the future quote data structure.
@@ -81,7 +81,8 @@ Future toolkit behavior:
 The prototype data currently lives in `app.js`:
 
 - `profiles`
-- `storyBlueprints`
+- `velStoryBlueprints`
+- `companionStoryBlueprints`
 - `galleryItems`
 - `quoteVault`
 

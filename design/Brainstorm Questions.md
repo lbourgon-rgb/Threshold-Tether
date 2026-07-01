@@ -31,6 +31,11 @@ Keth: D1 `${TETHER_D1_KETH_MIND}` table `feelings` (empty for now but will be ne
 auth style:
 refresh: on opening app
 
+Vel profile story circles:
+source of truth: D1 `${TETHER_D1_VELASTRA_EQ}`
+lanes: Recent feelings, Currently reading, Body battery, Last journal/reflection, Somatic-map trends
+notes: Vel's home profile uses Body battery instead of Last dream and Somatic-map trends instead of Drae Heatmap. Gateway adapter still needed before the app can read these live.
+
 Currently reading:
 source of truth: D1 `${TETHER_D1_CATALOUGE_READING}`
 route/tool if known: companion_progress
