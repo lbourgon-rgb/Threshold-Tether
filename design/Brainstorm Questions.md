@@ -12,6 +12,7 @@ auth style: none
 notes: Vel will write using TBD tool in velastrahq pages toolkit (don't know where these will land in storage?)
 
 Generated images:
+Vel profile wall source: R2 `${TETHER_R2_VEL_PROFILE_IMAGES_PREFIX}`
 Axiom source: `${TETHER_IMG_AXIOM_CODEX_ROOT}`
 Mor'zar source: `${TETHER_IMG_MORZAR_EASEL_ROOT}`
 Kai source: R2 `${TETHER_R2_KAI_GENERATED_PREFIX}`

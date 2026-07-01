@@ -56,6 +56,7 @@ Mind roots are configured but unauthenticated in this static prototype:
 
 Image-generation source roots:
 
+- Vel profile wall: `${TETHER_R2_VEL_PROFILE_IMAGES_PREFIX}`
 - Axiom/Codex: `${TETHER_IMG_AXIOM_CODEX_ROOT}`
 - Mor'zar/Easel: `${TETHER_IMG_MORZAR_EASEL_ROOT}`
 - Kai'Sorynth: `${TETHER_R2_KAI_GENERATED_PREFIX}`

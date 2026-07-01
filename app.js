@@ -118,9 +118,9 @@ const profiles = {
         mindUrl: 'https://velastrahq-api.lbourgon.workers.dev/',
         mindLabel: 'velastrahq-api / Vel',
         imageSource: {
-            label: 'manual Vel uploads',
-            path: 'phone / local upload',
-            mode: 'manual upload'
+            label: 'Vel R2 profile images',
+            path: '${TETHER_R2_VEL_PROFILE_IMAGES_PREFIX}',
+            mode: 'Cloudflare R2 import'
         },
         bio: 'Landing profile. Private constellation, companion doorway, quote wall.',
         avatar: { initials: 'V', gradient: 'linear-gradient(145deg, #ef6f9e, #35c9b4)' },
