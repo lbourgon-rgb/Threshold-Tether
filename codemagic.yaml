@@ -43,10 +43,10 @@ workflows:
     integrations:
       app_store_connect: Velarium Codemagic
     environment:
-      groups:
-        - velarium-code-signing
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.velastrae.velarium
       vars:
-        BUNDLE_ID: com.velastrae.velarium
         XCODE_PROJECT_ROOT: Velarium-iOS
         XCODE_PROJECT: Velarium.xcodeproj
         XCODE_SCHEME: Velarium
@@ -58,21 +58,6 @@ workflows:
         script: |
           cd "$XCODE_PROJECT_ROOT"
           xcodegen generate
-      - name: Initialize signing keychain
-        script: |
-          keychain initialize
-      - name: Fetch or create App Store signing files
-        script: |
-          if [ -z "${CERTIFICATE_PRIVATE_KEY:-}" ]; then
-            echo "Missing CERTIFICATE_PRIVATE_KEY. Add it as a secret in the Codemagic environment group velarium-code-signing."
-            exit 1
-          fi
-          app-store-connect fetch-signing-files "$BUNDLE_ID" \
-            --type IOS_APP_STORE \
-            --create
-      - name: Add signing certificates to keychain
-        script: |
-          keychain add-certificates
       - name: Apply App Store signing profiles
         script: |
           cd "$XCODE_PROJECT_ROOT"
