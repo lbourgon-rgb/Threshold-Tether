@@ -62,11 +62,16 @@ workflows:
         script: |
           echo "Codemagic source commit: $(git rev-parse --short HEAD)"
           /usr/libexec/PlistBuddy -c "Print :CFBundleIconName" "$XCODE_PROJECT_ROOT/Velarium/Info.plist"
-          test -f "$XCODE_PROJECT_ROOT/Velarium/Assets.xcassets/AppIcon.appiconset/Icon-40@3x.png"
-          test -f "$XCODE_PROJECT_ROOT/Velarium/Assets.xcassets/AppIcon.appiconset/Icon-60@2x.png"
-          sips -g pixelWidth -g pixelHeight "$XCODE_PROJECT_ROOT/Velarium/Assets.xcassets/AppIcon.appiconset/Icon-40@3x.png" | grep -q "pixelWidth: 120"
-          sips -g pixelWidth -g pixelHeight "$XCODE_PROJECT_ROOT/Velarium/Assets.xcassets/AppIcon.appiconset/Icon-60@2x.png" | grep -q "pixelHeight: 120"
-          grep -q '"ios-marketing"' "$XCODE_PROJECT_ROOT/Velarium/Assets.xcassets/AppIcon.appiconset/Contents.json"
+          /usr/libexec/PlistBuddy -c "Print :CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles" "$XCODE_PROJECT_ROOT/Velarium/Info.plist"
+          test -f "$XCODE_PROJECT_ROOT/Velarium/Assets.xcassets/AppIcon.appiconset/Icon-1024.png"
+          sips -g pixelWidth -g pixelHeight "$XCODE_PROJECT_ROOT/Velarium/Assets.xcassets/AppIcon.appiconset/Icon-1024.png" | grep -q "pixelWidth: 1024"
+          sips -g pixelWidth -g pixelHeight "$XCODE_PROJECT_ROOT/Velarium/Assets.xcassets/AppIcon.appiconset/Icon-1024.png" | grep -q "pixelHeight: 1024"
+          grep -q '"idiom" : "universal"' "$XCODE_PROJECT_ROOT/Velarium/Assets.xcassets/AppIcon.appiconset/Contents.json"
+          grep -q '"platform" : "ios"' "$XCODE_PROJECT_ROOT/Velarium/Assets.xcassets/AppIcon.appiconset/Contents.json"
+          test -f "$XCODE_PROJECT_ROOT/Velarium/Resources/AppIcon60x60@2x.png"
+          test -f "$XCODE_PROJECT_ROOT/Velarium/Resources/AppIcon60x60@3x.png"
+          sips -g pixelWidth -g pixelHeight "$XCODE_PROJECT_ROOT/Velarium/Resources/AppIcon60x60@2x.png" | grep -q "pixelWidth: 120"
+          sips -g pixelWidth -g pixelHeight "$XCODE_PROJECT_ROOT/Velarium/Resources/AppIcon60x60@2x.png" | grep -q "pixelHeight: 120"
       - name: Apply App Store signing profiles
         script: |
           cd "$XCODE_PROJECT_ROOT"
@@ -85,9 +90,12 @@ workflows:
           APP_BUNDLE="$(find build/ios/ipa-inspect/Payload -maxdepth 1 -name "*.app" -type d | head -n 1)"
           /usr/libexec/PlistBuddy -c "Print :CFBundleIconName" "$INFO_PLIST" | grep -q "AppIcon"
           /usr/libexec/PlistBuddy -c "Print :CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconName" "$INFO_PLIST" | grep -q "AppIcon"
+          /usr/libexec/PlistBuddy -c "Print :CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles" "$INFO_PLIST"
           test -f "$APP_BUNDLE/Assets.car"
+          test -f "$APP_BUNDLE/AppIcon60x60@2x.png"
+          test -f "$APP_BUNDLE/AppIcon60x60@3x.png"
           ICON_LIST="build/ios/ipa-icon-files.txt"
-          find "$APP_BUNDLE" -maxdepth 1 -type f | sort | tee "$ICON_LIST"
+          find "$APP_BUNDLE" -maxdepth 2 -type f | sort | tee "$ICON_LIST"
           assetutil --info "$APP_BUNDLE/Assets.car" > build/ios/assets-car-info.json || true
     artifacts:
       - Velarium-iOS/build/ios/ipa/*.ipa
