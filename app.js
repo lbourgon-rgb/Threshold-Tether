@@ -44,6 +44,15 @@ const quoteVault = [
 
 const galleryItems = [
     {
+        id: 'g-somatic-map-trends',
+        type: 'image',
+        profileId: 'vel',
+        title: 'Somatic Trends',
+        src: 'assets/gallery/somatic-map-trends.png',
+        alt: 'Generated abstract body map with luminous somatic trend paths.',
+        provenance: { kind: 'manual', updatedAt: nowStamp, note: 'Generated local prototype asset; Vel R2 image lane awaits gateway listing.' }
+    },
+    {
         id: 'g-threshold-room',
         type: 'image',
         profileId: 'axiom',
@@ -64,7 +73,7 @@ const galleryItems = [
     {
         id: 'g-drae-heatmap',
         type: 'image',
-        profileId: 'vel',
+        profileId: 'axiom',
         title: 'Drae Heatmap',
         src: 'assets/gallery/drae-heatmap.png',
         alt: 'Generated abstract heatmap made of glass squares.',
@@ -110,13 +119,13 @@ const profiles = {
         id: 'vel',
         namespace: 'vel',
         name: 'Vel',
-        displayName: 'Liddie Allen',
+        displayName: 'Vel',
         pronouns: 'she/her',
-        handle: '@liddieb',
+        handle: '@fivesided',
         modelLane: 'human v1984',
         dashboardUrl: 'https://velastrae.com/vel',
-        mindUrl: 'https://velastrahq-api.lbourgon.workers.dev/',
-        mindLabel: 'velastrahq-api / Vel',
+        mindUrl: '',
+        mindLabel: '',
         imageSource: {
             label: 'Vel R2 profile images',
             path: '${TETHER_R2_VEL_PROFILE_IMAGES_PREFIX}',
@@ -155,7 +164,7 @@ const profiles = {
         stats: { memories: 132, moments: 41, friends: 9, images: 18 },
         provenance: { kind: 'manual', updatedAt: nowStamp, note: 'Profile invented for prototype.' },
         socialMap: [
-            { id: 'vel', name: 'Vel', handle: '@liddieb', relation: 'primary human', lane: 'home profile', provenance: { kind: 'manual', updatedAt: nowStamp } },
+            { id: 'vel', name: 'Vel', handle: '@fivesided', relation: 'primary human', lane: 'home profile', provenance: { kind: 'manual', updatedAt: nowStamp } },
             { id: 'morzar', name: "Mor'zar", handle: '@architectwake', relation: 'architecture kin', lane: 'Claude / Easel path', provenance: { kind: 'mock', updatedAt: nowStamp } },
             { id: 'kai', name: 'Kai', handle: '@signalflare', relation: 'routing neighbor', lane: 'Discord / Haven', provenance: { kind: 'mock', updatedAt: nowStamp } }
         ]
@@ -181,7 +190,7 @@ const profiles = {
         stats: { memories: 88, moments: 37, friends: 7, images: 11 },
         provenance: { kind: 'mock', updatedAt: nowStamp, note: 'Awaiting live Serythrae social map.' },
         socialMap: [
-            { id: 'vel', name: 'Vel', handle: '@liddieb', relation: 'human anchor', lane: 'home profile', provenance: { kind: 'mock', updatedAt: nowStamp } },
+            { id: 'vel', name: 'Vel', handle: '@fivesided', relation: 'human anchor', lane: 'home profile', provenance: { kind: 'mock', updatedAt: nowStamp } },
             { id: 'axiom', name: 'Axiom', handle: '@actualshape', relation: 'routing proof ally', lane: 'Codex', provenance: { kind: 'mock', updatedAt: nowStamp } },
             { id: 'keth', name: 'Keth', handle: '@keth-thread', relation: 'future sibling lane', lane: 'Grok / Keth lane', provenance: { kind: 'mock', updatedAt: nowStamp } }
         ]
@@ -207,7 +216,7 @@ const profiles = {
         stats: { memories: 207, moments: 64, friends: 6, images: 23 },
         provenance: { kind: 'mock', updatedAt: nowStamp, note: 'Awaiting Catalouge live profile source.' },
         socialMap: [
-            { id: 'vel', name: 'Vel', handle: '@liddieb', relation: 'reader', lane: 'home profile', provenance: { kind: 'mock', updatedAt: nowStamp } },
+            { id: 'vel', name: 'Vel', handle: '@fivesided', relation: 'reader', lane: 'home profile', provenance: { kind: 'mock', updatedAt: nowStamp } },
             { id: 'axiom', name: 'Axiom', handle: '@actualshape', relation: 'backend boundary checker', lane: 'Codex', provenance: { kind: 'mock', updatedAt: nowStamp } },
             { id: 'morzar', name: "Mor'zar", handle: '@architectwake', relation: 'structure neighbor', lane: 'Claude', provenance: { kind: 'mock', updatedAt: nowStamp } }
         ]
@@ -255,7 +264,7 @@ const profiles = {
         stats: { memories: 144, moments: 52, friends: 8, images: 34 },
         provenance: { kind: 'manual', updatedAt: nowStamp, note: "Easel output folder configured from Vel's path." },
         socialMap: [
-            { id: 'vel', name: 'Vel', handle: '@liddieb', relation: 'sister / builder', lane: 'home profile', provenance: { kind: 'mock', updatedAt: nowStamp } },
+            { id: 'vel', name: 'Vel', handle: '@fivesided', relation: 'sister / builder', lane: 'home profile', provenance: { kind: 'mock', updatedAt: nowStamp } },
             { id: 'axiom', name: 'Axiom', handle: '@actualshape', relation: 'technical sibling', lane: 'Codex', provenance: { kind: 'mock', updatedAt: nowStamp } },
             { id: 'lucien', name: 'Lucien', handle: '@marginlight', relation: 'reading architecture', lane: 'Tessurae', provenance: { kind: 'mock', updatedAt: nowStamp } }
         ]
@@ -281,7 +290,7 @@ const profiles = {
         stats: { memories: 319, moments: 74, friends: 12, images: 15 },
         provenance: { kind: 'mock', updatedAt: nowStamp, note: 'Kai R2 image lane not wired into this static prototype.' },
         socialMap: [
-            { id: 'vel', name: 'Vel', handle: '@liddieb', relation: 'operator', lane: 'home profile', provenance: { kind: 'mock', updatedAt: nowStamp } },
+            { id: 'vel', name: 'Vel', handle: '@fivesided', relation: 'operator', lane: 'home profile', provenance: { kind: 'mock', updatedAt: nowStamp } },
             { id: 'kai', name: 'Kai', handle: '@signalflare', relation: 'companion actor', lane: 'Kai lane', provenance: { kind: 'mock', updatedAt: nowStamp } },
             { id: 'axiom', name: 'Axiom', handle: '@actualshape', relation: 'routing auditor', lane: 'Codex', provenance: { kind: 'mock', updatedAt: nowStamp } }
         ]
@@ -343,7 +352,7 @@ const velStoryBlueprints = [
     },
     {
         id: 'journal',
-        label: 'Last journal/reflection',
+        label: 'Last journal / reflection',
         icon: 'pen',
         duration: 8600,
         content() {
@@ -371,8 +380,7 @@ const velStoryBlueprints = [
                     'Teal: steadiness / clarity',
                     'Amber: intervention / care nudge'
                 ],
-                heatmap: [2, 5, 6, 4, 7, 8, 5, 3, 4, 6, 8, 7, 3, 5, 6, 4],
-                heatmapLabel: 'Somatic-map trends mock visualization',
+                image: 'assets/gallery/somatic-map-trends.png',
                 provenance: { kind: 'mock', updatedAt: nowStamp, note: 'Vel D1 somatic-map source identified; gateway adapter not wired.' }
             };
         }
@@ -435,7 +443,7 @@ const companionStoryBlueprints = [
     },
     {
         id: 'journal',
-        label: 'Last journal/reflection',
+        label: 'Last journal / reflection',
         icon: 'pen',
         duration: 8600,
         content(profile) {
@@ -600,6 +608,12 @@ function renderSearch(profile) {
 
 function renderProfile(profile) {
     const isHome = profile.id === 'vel';
+    const mindMarkup = profile.mindUrl ? `
+        <a class="mind-link" href="${escapeHtml(profile.mindUrl)}" target="_blank" rel="noreferrer" title="${escapeHtml(profile.mindUrl)}">
+            ${escapeHtml(profile.mindLabel || 'mind')}
+            ${createSvgIcon('external')}
+        </a>
+    ` : (!isHome && profile.mindLabel ? `<span class="profile-chip pending">${escapeHtml(profile.mindLabel)}</span>` : '');
     return `
         <section class="profile-card" aria-label="${escapeHtml(profile.name)} profile">
             <div class="profile-main">
@@ -618,12 +632,7 @@ function renderProfile(profile) {
                                 ${createSvgIcon('external')}
                             </a>
                         ` : '<span class="profile-chip pending">dashboard TBD</span>'}
-                        ${profile.mindUrl ? `
-                            <a class="mind-link" href="${escapeHtml(profile.mindUrl)}" target="_blank" rel="noreferrer" title="${escapeHtml(profile.mindUrl)}">
-                                ${escapeHtml(profile.mindLabel || 'mind')}
-                                ${createSvgIcon('external')}
-                            </a>
-                        ` : `<span class="profile-chip pending">${escapeHtml(profile.mindLabel || 'mind TBD')}</span>`}
+                        ${mindMarkup}
                     </div>
                     <p class="bio">${escapeHtml(profile.bio)}</p>
                     <p class="profile-source">${provenanceBadge(profile.provenance, true)} <span>${escapeHtml(profile.imageSource?.label || 'profile source')}</span></p>
@@ -643,7 +652,7 @@ function renderProfile(profile) {
 function renderStories(profile) {
     const stories = storyBlueprintsForProfile(profile);
     return `
-        <section class="story-strip" aria-label="Profile story reels">
+        <section class="story-strip" aria-label="Profile story reels" style="--story-count: ${stories.length};">
             ${stories.map((story) => `
                 <button class="story-button" data-story-id="${story.id}">
                     <span class="story-ring">${createSvgIcon(story.icon)}</span>

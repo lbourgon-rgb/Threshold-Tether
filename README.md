@@ -20,6 +20,22 @@ http://127.0.0.1:4178/
 
 The app can also be hosted as static files on Cloudflare Pages, Pages-compatible hosting, or any HTTPS web server. The manifest and service worker are included for installable PWA behavior when the browser supports it.
 
+## Live Phone Prototype
+
+Current Worker URL:
+
+```text
+https://threshold-tether.lbourgon.workers.dev/
+```
+
+The Worker entrypoint is `src/worker.js`. It serves static assets and exposes `/api/health` as the first gateway heartbeat.
+
+Deploy from a clean temp asset bundle so `.env.local`, design notes, and git metadata are not uploaded:
+
+```powershell
+.\scripts\deploy-worker-assets.ps1
+```
+
 ## Current Prototype
 
 - Vel landing profile is the home screen.
@@ -45,9 +61,8 @@ Public profile/dashboard links:
 - Kai'Sorynth: `https://serythrae.com/kai`
 - Keth: earmarked, dashboard TBD
 
-Mind roots are configured but unauthenticated in this static prototype:
+Mind roots are configured but unauthenticated in this static prototype. Vel's private mind/API root is intentionally not displayed on her profile card.
 
-- Vel: `https://velastrahq-api.lbourgon.workers.dev/` (`velastrahq-api / Vel`)
 - Axiom: `https://axiom-cogcore.lbourgon.workers.dev/`
 - Mor'zar: `https://eq.velastrae.com/`
 - Kai'Sorynth: `https://mind.serythrae.com/`

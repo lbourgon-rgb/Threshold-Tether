@@ -456,12 +456,12 @@ button {
 
 .story-strip {
     display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: 62px;
-    gap: 7px;
+    grid-template-columns: repeat(var(--story-count, 5), minmax(0, 1fr));
+    column-gap: 9px;
+    row-gap: 8px;
     margin-top: 8px;
-    padding: 8px;
-    overflow-x: auto;
+    padding: 12px 10px 10px;
+    overflow: visible;
     scrollbar-width: none;
 }
 
@@ -472,23 +472,28 @@ button {
 .story-button {
     display: grid;
     justify-items: center;
-    gap: 6px;
+    align-content: start;
+    gap: 7px;
     min-width: 0;
+    width: 100%;
     background: transparent;
 }
 
 .story-button span:last-child {
     color: var(--soft);
+    width: 100%;
     font-size: 10px;
-    line-height: 1.2;
+    line-height: 1.15;
     text-align: center;
+    overflow-wrap: normal;
+    word-break: normal;
 }
 
 .story-ring {
     display: grid;
     place-items: center;
-    width: 46px;
-    height: 46px;
+    width: clamp(42px, 11vw, 50px);
+    height: clamp(42px, 11vw, 50px);
     border-radius: 50%;
     border: 2px solid var(--rose);
     color: var(--rose);
@@ -497,8 +502,8 @@ button {
 }
 
 .story-ring .icon {
-    width: 20px;
-    height: 20px;
+    width: 21px;
+    height: 21px;
 }
 
 .wall-toolbar {
