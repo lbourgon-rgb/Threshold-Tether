@@ -58,6 +58,15 @@ workflows:
         script: |
           cd "$XCODE_PROJECT_ROOT"
           xcodegen generate
+      - name: Verify source icon metadata
+        script: |
+          echo "Codemagic source commit: $(git rev-parse --short HEAD)"
+          /usr/libexec/PlistBuddy -c "Print :CFBundleIconName" "$XCODE_PROJECT_ROOT/Velarium/Info.plist"
+          test -f "$XCODE_PROJECT_ROOT/Velarium/Assets.xcassets/AppIcon.appiconset/Icon-40@3x.png"
+          test -f "$XCODE_PROJECT_ROOT/Velarium/Assets.xcassets/AppIcon.appiconset/Icon-60@2x.png"
+          sips -g pixelWidth -g pixelHeight "$XCODE_PROJECT_ROOT/Velarium/Assets.xcassets/AppIcon.appiconset/Icon-40@3x.png" | grep -q "pixelWidth: 120"
+          sips -g pixelWidth -g pixelHeight "$XCODE_PROJECT_ROOT/Velarium/Assets.xcassets/AppIcon.appiconset/Icon-60@2x.png" | grep -q "pixelHeight: 120"
+          grep -q '"ios-marketing"' "$XCODE_PROJECT_ROOT/Velarium/Assets.xcassets/AppIcon.appiconset/Contents.json"
       - name: Apply App Store signing profiles
         script: |
           cd "$XCODE_PROJECT_ROOT"
@@ -66,8 +75,20 @@ workflows:
         script: |
           cd "$XCODE_PROJECT_ROOT"
           xcode-project build-ipa --project "$XCODE_PROJECT" --scheme "$XCODE_SCHEME" --clean
+      - name: Verify built IPA icon metadata
+        script: |
+          cd "$XCODE_PROJECT_ROOT"
+          rm -rf build/ios/ipa-inspect
+          mkdir -p build/ios/ipa-inspect
+          unzip -q build/ios/ipa/Velarium.ipa -d build/ios/ipa-inspect
+          INFO_PLIST="$(find build/ios/ipa-inspect/Payload -name Info.plist | head -n 1)"
+          /usr/libexec/PlistBuddy -c "Print :CFBundleIconName" "$INFO_PLIST"
+          ICON_LIST="build/ios/ipa-icon-files.txt"
+          find build/ios/ipa-inspect/Payload -type f \( -name "*120*.png" -o -name "AppIcon*.png" \) | tee "$ICON_LIST"
+          grep -E "(AppIcon60x60@2x|AppIcon40x40@3x|120.*\.png)" "$ICON_LIST"
     artifacts:
       - Velarium-iOS/build/ios/ipa/*.ipa
+      - Velarium-iOS/build/ios/ipa-icon-files.txt
       - Velarium-iOS/build/ios/xcarchive/*.xcarchive
       - /tmp/xcodebuild_logs/*.log
     publishing:
