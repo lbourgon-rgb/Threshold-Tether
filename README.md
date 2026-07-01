@@ -30,7 +30,21 @@ Current Worker URL:
 https://velarium.lbourgon.workers.dev/
 ```
 
-The Worker entrypoint is `src/worker.js`. It serves static assets and exposes `/api/health` as the first gateway heartbeat.
+The Worker entrypoint is `src/worker.js`. It serves static assets and exposes a small Velarium gateway:
+
+- `GET /api/health`
+- `GET /api/bootstrap`
+- `GET /api/sources`
+- `GET /api/profiles`
+- `GET /api/profiles/:id`
+- `GET /api/profiles/:id/stories`
+- `GET /api/profiles/:id/social-map`
+- `GET /api/gallery`
+- `GET /api/quotes`
+- `GET /api/media/:source/:key`
+- `POST /api/import/lucien-image`
+
+Endpoint/source docs live in `docs/gateway-endpoints.md`.
 
 Deploy from a clean temp asset bundle so `.env.local`, design notes, and git metadata are not uploaded:
 
@@ -126,7 +140,7 @@ Future toolkit behavior:
 
 ## Data Model Seeds
 
-The prototype data currently lives in `app.js`:
+The prototype data currently lives in `app.js` for the web app, `Velarium-iOS/Velarium/MockData.swift` for the native app, and `src/gateway-data.js` for the Worker gateway contract:
 
 - `profiles`
 - `velStoryBlueprints`
@@ -154,18 +168,18 @@ The quote capture structure is ready for a future tool:
 
 ## Still Mocked
 
-These need real endpoints or import jobs before the app should call anything `live`:
+The gateway now exposes source status and fixture fallbacks. These still need real authorized adapters, bindings, or import jobs before the app should call their content `live`:
 
-- Companion profile registry: name, handle, model lane, dashboard URL, avatar, bio.
-- Social engagement map counts and connection lists per companion.
-- Recent feelings/emotional-state summaries.
-- Currently reading from Tessurae/Catalouge.
-- Last dream and last journal/reflection source.
-- Drae Heatmap data source.
-- Generated image ingestion from `.codex`, `.claude/easel`, Serythrae R2, and any Lucien/ChatGPT export lane.
-- Quote capture persistence and source deep links.
-- API-key storage for the configured mind roots.
-- A hosted import job for local image roots and Serythrae R2.
+- Companion private mind story summaries for Axiom, Mor'zar, Kai'Sorynth, and Lucien.
+- Social engagement map counts and connection lists from each existing companion store.
+- Authorized Vel recent feelings, reading, body battery, journal/reflection, and somatic-map story summaries in the app UI.
+- Drae/Tahl heatmap data source.
+- Generated image ingestion from `.codex`, Mor'zar Easel, Serythrae R2, and Lucien/ChatGPT upload.
+- Quote capture persistence and source deep links in the Velastra toolkit.
+- Sign in with Apple identity/session verification for private live reads.
+- Hosted import jobs for local image roots.
+
+The native iOS app now checks the gateway health/source-status endpoint from the Memory tab, but profile/story/gallery content remains bundled fixtures until the authenticated live snapshot flow is enabled.
 
 ## Assets
 

@@ -84,9 +84,13 @@ struct SearchResultCard: View {
 }
 
 struct MemoryView: View {
+    @EnvironmentObject private var gateway: GatewayStatusStore
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
+                GatewayStatusPanel(gateway: gateway)
+
                 Text("Quote structure")
                     .font(.title3.weight(.bold))
                     .foregroundStyle(Color.velText)
@@ -102,6 +106,78 @@ struct MemoryView: View {
             .padding(14)
         }
         .background(Color.velBackground.ignoresSafeArea())
+    }
+}
+
+struct GatewayStatusPanel: View {
+    let gateway: GatewayStatusStore
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("Gateway")
+                        .font(.title3.weight(.bold))
+                        .foregroundStyle(Color.velText)
+                    Text(gateway.updatedAt)
+                        .font(.caption)
+                        .foregroundStyle(Color.velMuted)
+                }
+
+                Spacer()
+                ProvenancePill(provenance: Provenance(kind: gateway.phase, updatedAt: gateway.updatedAt, note: gateway.message))
+            }
+
+            Text(gateway.message)
+                .font(.caption)
+                .foregroundStyle(Color.velMuted)
+
+            if gateway.sources.isEmpty {
+                Text("Source details appear here after the gateway responds.")
+                    .font(.caption)
+                    .foregroundStyle(Color.velMuted)
+            } else {
+                ForEach(gateway.sources.prefix(6)) { source in
+                    GatewaySourceRow(source: source)
+                }
+            }
+        }
+        .padding(12)
+        .velCard()
+    }
+}
+
+struct GatewaySourceRow: View {
+    let source: GatewaySourceStatus
+
+    private var provenance: Provenance {
+        Provenance(
+            kind: ProvenanceKind(rawValue: source.provenance ?? "") ?? .mock,
+            updatedAt: source.checkedAt ?? "not checked",
+            note: source.note ?? ""
+        )
+    }
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 10) {
+            Circle()
+                .fill(provenance.kind.color)
+                .frame(width: 8, height: 8)
+                .padding(.top, 6)
+
+            VStack(alignment: .leading, spacing: 3) {
+                Text(source.label)
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(Color.velText)
+                Text(source.status ?? "unknown")
+                    .font(.caption2)
+                    .foregroundStyle(Color.velMuted)
+                    .lineLimit(2)
+            }
+
+            Spacer()
+            ProvenancePill(provenance: provenance)
+        }
     }
 }
 
@@ -232,4 +308,3 @@ struct ConnectionRow: View {
         .velCard()
     }
 }
-

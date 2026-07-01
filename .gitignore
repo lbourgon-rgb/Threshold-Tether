@@ -28,3 +28,6 @@ Velarium-iOS/DerivedData/
 # Local signing helpers/secrets
 .velarium-local/
 ios_distribution_private_key*
+
+# Local Cloudflare/Miniflare state
+.wrangler/

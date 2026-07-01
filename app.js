@@ -486,6 +486,9 @@ let storyTimer = null;
 let storyStartedAt = 0;
 let storyDuration = 0;
 let touchStartX = null;
+let gatewayStoriesByProfile = {};
+let gatewaySourceStatus = [];
+let gatewayLoadedAt = null;
 
 function $(selector, root = document) {
     return root.querySelector(selector);
@@ -529,6 +532,18 @@ function profileById(id) {
 }
 
 function storyBlueprintsForProfile(profile) {
+    if (Array.isArray(gatewayStoriesByProfile[profile.id])) {
+        return gatewayStoriesByProfile[profile.id].map((story) => ({
+            id: story.id,
+            label: story.label,
+            icon: story.icon,
+            duration: story.duration,
+            content() {
+                return story.content || {};
+            }
+        }));
+    }
+
     return profile.id === 'vel' ? velStoryBlueprints : companionStoryBlueprints;
 }
 
@@ -1203,4 +1218,42 @@ if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
     });
 }
 
+async function hydrateFromGateway() {
+    if (!location.protocol.startsWith('http')) return;
+
+    try {
+        const response = await fetch('/api/bootstrap', {
+            headers: { Accept: 'application/json' },
+            cache: 'no-store'
+        });
+        if (!response.ok) return;
+
+        const snapshot = await response.json();
+        if (!snapshot?.ok) return;
+
+        if (snapshot.profilesById && typeof snapshot.profilesById === 'object') {
+            Object.assign(profiles, snapshot.profilesById);
+        }
+
+        if (Array.isArray(snapshot.quoteVault)) {
+            quoteVault.splice(0, quoteVault.length, ...snapshot.quoteVault);
+        }
+
+        if (Array.isArray(snapshot.galleryItems)) {
+            galleryItems.splice(0, galleryItems.length, ...snapshot.galleryItems);
+        }
+
+        if (snapshot.storiesByProfile && typeof snapshot.storiesByProfile === 'object') {
+            gatewayStoriesByProfile = snapshot.storiesByProfile;
+        }
+
+        gatewaySourceStatus = Array.isArray(snapshot.sourceStatus) ? snapshot.sourceStatus : [];
+        gatewayLoadedAt = snapshot.generatedAt || new Date().toISOString();
+        renderApp();
+    } catch (error) {
+        console.warn('Velarium gateway hydrate skipped:', error);
+    }
+}
+
 renderApp();
+hydrateFromGateway();

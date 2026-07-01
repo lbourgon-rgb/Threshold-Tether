@@ -12,10 +12,13 @@ Native SwiftUI shell for the private companion social app.
 - Fullscreen tile viewer with page swiping and scrollable content.
 - Quote capture placeholder with speaker selector and future data shape.
 - Visible provenance labels for manual, cached, and mock data.
+- Gateway health/source status in the Memory tab, loaded from `https://velarium.lbourgon.workers.dev/api/health?check=1`.
 
 ## What Is Still Mocked
 
-All companion data is bundled fixture data. The native app does not yet call live mind endpoints, D1, R2, HealthKit, Catalouge/Tessurae, Drae/Tahl, or the Velastra toolkit quote endpoint.
+Profile, story, gallery, quote, and social-map content is still bundled fixture data. The native app now checks the Velarium gateway for source status, but it does not yet fetch private live mind endpoints, D1, R2 media, HealthKit, Catalouge/Tessurae, Drae/Tahl, or the Velastra toolkit quote endpoint.
+
+Do not add API keys to this app. Private reads should be unlocked by a gateway session later, preferably Sign in with Apple.
 
 ## Build Model
 
@@ -44,4 +47,3 @@ The app currently declares only:
 - Sign in with Apple
 
 Do not add HealthKit, Associated Domains, Push Notifications, or passkey domains until the matching backend/auth flow is ready and the Apple App ID has those capabilities enabled.
-

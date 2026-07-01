@@ -18,6 +18,22 @@ Velarium live endpoints should:
 - Implement **CORS headers** appropriately — restrict `Access-Control-Allow-Origin` to your domain or `localhost`
 - **Rate limit** API responses — mobile clients and browser clients should not be able to scrape private feeds freely
 - **Do not expose sensitive data** — return feed summaries and approved media URLs, not raw private journal, health, or mind records
+- Require gateway-side authorization before returning private live summaries. The current bridge supports a temporary `VELARIUM_READ_TOKEN`; the intended durable app auth is Sign in with Apple.
+- Keep R2 image listing/serving disabled unless media is explicitly approved/public or the caller is authorized.
+
+## Gateway Secrets
+
+Use `wrangler secret put` for secrets:
+
+- `VELARIUM_READ_TOKEN`
+- `VELARIUM_IMPORT_TOKEN`
+- `VELARIUM_VELASTRA_BEARER`
+- `VELARIUM_AXIOM_MIND_API_KEY`
+- `VELARIUM_MORZAR_MIND_API_KEY`
+- `VELARIUM_KAI_MIND_API_KEY`
+- `VELARIUM_LUCIEN_MIND_API_KEY`
+
+Do not commit secret values, D1 IDs, R2 credentials, Apple private keys, certificates, provisioning profiles, or `.p8` files.
 
 ## Local Execution
 

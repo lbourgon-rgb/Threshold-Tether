@@ -41,6 +41,7 @@ enum AppTab: Hashable, CaseIterable {
 struct AppView: View {
     @State private var selectedTab: AppTab = .home
     @State private var showingQuoteCapture = false
+    @StateObject private var gateway = GatewayStatusStore()
 
     var body: some View {
         TabView(selection: Binding(get: { selectedTab }, set: updateSelection)) {
@@ -82,6 +83,10 @@ struct AppView: View {
             QuoteCaptureSheet()
                 .presentationDetents([.medium, .large])
         }
+        .environmentObject(gateway)
+        .task {
+            await gateway.refresh()
+        }
     }
 
     private func updateSelection(_ tab: AppTab) {
@@ -93,4 +98,3 @@ struct AppView: View {
         selectedTab = tab
     }
 }
-
