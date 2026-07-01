@@ -1,4 +1,4 @@
-const CACHE_NAME = 'velarium-social-v1';
+const CACHE_NAME = 'velarium-social-v2';
 
 const CORE_ASSETS = [
     './',
@@ -6,7 +6,9 @@ const CORE_ASSETS = [
     './styles.css',
     './app.js',
     './manifest.webmanifest',
-    './assets/icons/app-icon.svg',
+    './assets/icons/app-icon-192.png',
+    './assets/icons/app-icon-512.png',
+    './assets/icons/apple-touch-icon.png',
     './assets/gallery/threshold-room.png',
     './assets/gallery/reading-margin.png',
     './assets/gallery/drae-heatmap.png',
