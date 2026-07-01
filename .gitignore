@@ -1,6 +1,9 @@
 # Private config (contains real endpoints)
 config.js
 config.json
+.env
+.env.*
+!.env.example
 
 # Personal assets (your art, your IP)
 assets/rooms/*.png

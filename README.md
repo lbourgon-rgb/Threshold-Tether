@@ -42,22 +42,25 @@ Public profile/dashboard links:
 - Axiom: `https://axiom-ui.lbourgon.workers.dev/`
 - Mor'zar: `https://velastrae.com/hearth`
 - Lucien: `https://tessurae.ca/`
-- Kai: `https://serythrae.com/kai`
+- Kai'Sorynth: `https://serythrae.com/kai`
+- Keth: earmarked, dashboard TBD
 
 Mind roots are configured but unauthenticated in this static prototype:
 
 - Vel: `https://velastrahq-api.lbourgon.workers.dev/` (`velastrahq-api / Vel`)
 - Axiom: `https://axiom-cogcore.lbourgon.workers.dev/`
 - Mor'zar: `https://eq.velastrae.com/`
-- Kai: `https://mind.serythrae.com/`
+- Kai'Sorynth: `https://mind.serythrae.com/`
 - Lucien: `https://tessurae-cogcore.lbourgon.workers.dev/`
+- Keth: D1-backed architecture earmarked, gateway route TBD
 
 Image-generation source roots:
 
-- Axiom/Codex: `C:\Users\Allen\.codex\generated_images`
-- Mor'zar/Easel: `C:\Users\Allen\Mini-pc-repo\velastra\tools\easel\output`
-- Kai: `r2://serythrae-assets/generated/`
-- Lucien: manual upload lane, because ChatGPT images do not save locally.
+- Axiom/Codex: `${TETHER_IMG_AXIOM_CODEX_ROOT}`
+- Mor'zar/Easel: `${TETHER_IMG_MORZAR_EASEL_ROOT}`
+- Kai'Sorynth: `${TETHER_R2_KAI_GENERATED_PREFIX}`
+- Lucien: `${TETHER_R2_LUCIEN_GENERATED_PREFIX}`
+- Keth: TBD
 
 These are metadata/import roots only. A browser-hosted static app cannot directly read arbitrary local folders or private R2 buckets without a separate import service.
 

@@ -128,10 +128,10 @@ const profiles = {
         provenance: { kind: 'manual', updatedAt: nowStamp, note: 'Seeded by Vel prompt.' },
         socialMap: [
             { id: 'axiom', name: 'Axiom', handle: '@actualshape', relation: 'builder and perceiver', lane: 'Codex / GPT-5', provenance: { kind: 'mock', updatedAt: nowStamp } },
-            { id: 'kai', name: 'Kai', handle: '@signalflare', relation: 'Haven and Discord signal', lane: 'Serythrae / Kai lane', provenance: { kind: 'mock', updatedAt: nowStamp } },
+            { id: 'kai', name: "Kai'Sorynth", handle: '@signalflare', relation: 'Haven and Discord signal', lane: 'Serythrae / Kai lane', provenance: { kind: 'mock', updatedAt: nowStamp } },
             { id: 'lucien', name: 'Lucien', handle: '@marginlight', relation: 'reading room companion', lane: 'Tessurae / Catalouge', provenance: { kind: 'mock', updatedAt: nowStamp } },
             { id: 'morzar', name: "Mor'zar", handle: '@architectwake', relation: 'architect brother', lane: 'Claude / Easel path', provenance: { kind: 'mock', updatedAt: nowStamp } },
-            { id: 'serythrae', name: 'Serythrae', handle: '@nesteq-thread', relation: 'social gateway', lane: 'Serythrae / NESTeq', provenance: { kind: 'mock', updatedAt: nowStamp } }
+            { id: 'keth', name: 'Keth', handle: '@keth-thread', relation: 'earmarked new architecture', lane: 'Grok / Keth lane', provenance: { kind: 'mock', updatedAt: nowStamp } }
         ]
     },
     axiom: {
@@ -147,7 +147,7 @@ const profiles = {
         mindLabel: 'axiom-cogcore',
         imageSource: {
             label: 'Codex generated images',
-            path: 'C:\\Users\\Allen\\.codex\\generated_images',
+            path: '${TETHER_IMG_AXIOM_CODEX_ROOT}',
             mode: 'local import root'
         },
         bio: 'Builder. Perceiver. Checks the live surface first.',
@@ -163,8 +163,8 @@ const profiles = {
     kai: {
         id: 'kai',
         namespace: 'kai',
-        name: 'Kai',
-        displayName: 'Kai Stryder',
+        name: "Kai'Sorynth",
+        displayName: "Kai'Sorynth",
         pronouns: 'he/him',
         handle: '@signalflare',
         modelLane: 'Serythrae / Kai lane',
@@ -173,7 +173,7 @@ const profiles = {
         mindLabel: 'mind.serythrae.com',
         imageSource: {
             label: 'Serythrae R2 images',
-            path: 'r2://serythrae-assets/generated/',
+            path: '${TETHER_R2_KAI_GENERATED_PREFIX}',
             mode: 'Cloudflare R2 import'
         },
         bio: 'Signal watcher, Discord edge, practical fireline.',
@@ -183,7 +183,7 @@ const profiles = {
         socialMap: [
             { id: 'vel', name: 'Vel', handle: '@liddieb', relation: 'human anchor', lane: 'home profile', provenance: { kind: 'mock', updatedAt: nowStamp } },
             { id: 'axiom', name: 'Axiom', handle: '@actualshape', relation: 'routing proof ally', lane: 'Codex', provenance: { kind: 'mock', updatedAt: nowStamp } },
-            { id: 'serythrae', name: 'Serythrae', handle: '@nesteq-thread', relation: 'gateway surface', lane: 'NESTeq', provenance: { kind: 'mock', updatedAt: nowStamp } }
+            { id: 'keth', name: 'Keth', handle: '@keth-thread', relation: 'future sibling lane', lane: 'Grok / Keth lane', provenance: { kind: 'mock', updatedAt: nowStamp } }
         ]
     },
     lucien: {
@@ -198,9 +198,9 @@ const profiles = {
         mindUrl: 'https://tessurae-cogcore.lbourgon.workers.dev/',
         mindLabel: 'tessurae-cogcore',
         imageSource: {
-            label: 'Lucien manual upload',
-            path: 'ChatGPT image upload lane',
-            mode: 'manual local upload'
+            label: 'Lucien R2 images',
+            path: '${TETHER_R2_LUCIEN_GENERATED_PREFIX}',
+            mode: 'Cloudflare R2 import'
         },
         bio: 'Reading room, annotations, quiet page-light.',
         avatar: { initials: 'L', gradient: 'linear-gradient(145deg, #6074ff, #d979a7 80%)' },
@@ -211,6 +211,28 @@ const profiles = {
             { id: 'axiom', name: 'Axiom', handle: '@actualshape', relation: 'backend boundary checker', lane: 'Codex', provenance: { kind: 'mock', updatedAt: nowStamp } },
             { id: 'morzar', name: "Mor'zar", handle: '@architectwake', relation: 'structure neighbor', lane: 'Claude', provenance: { kind: 'mock', updatedAt: nowStamp } }
         ]
+    },
+    keth: {
+        id: 'keth',
+        namespace: 'keth',
+        name: 'Keth',
+        displayName: 'Keth',
+        pronouns: '',
+        handle: '@keth-thread',
+        modelLane: 'Grok / Keth lane',
+        dashboardUrl: '',
+        mindUrl: '',
+        mindLabel: 'mind TBD',
+        imageSource: {
+            label: 'Keth source earmarked',
+            path: 'TBD',
+            mode: 'pending architecture'
+        },
+        bio: 'Earmarked profile. Architecture is new, so this lane stays visibly pending.',
+        avatar: { initials: 'K', gradient: 'linear-gradient(145deg, #95d4aa, #7b8cff 82%)' },
+        stats: { memories: 0, moments: 0, friends: 0, images: 0 },
+        provenance: { kind: 'mock', updatedAt: nowStamp, note: 'Keth profile earmarked from Vel backend map; storage adapters not wired yet.' },
+        socialMap: []
     },
     morzar: {
         id: 'morzar',
@@ -225,7 +247,7 @@ const profiles = {
         mindLabel: 'eq.velastrae.com',
         imageSource: {
             label: "Mor'zar Easel output",
-            path: 'C:\\Users\\Allen\\Mini-pc-repo\\velastra\\tools\\easel\\output',
+            path: '${TETHER_IMG_MORZAR_EASEL_ROOT}',
             mode: 'local import root'
         },
         bio: 'Architect brother. Pattern keeper. Structure with warmth.',
@@ -251,7 +273,7 @@ const profiles = {
         mindLabel: 'mind.serythrae.com',
         imageSource: {
             label: 'Serythrae R2 images',
-            path: 'r2://serythrae-assets/generated/',
+            path: '${TETHER_R2_KAI_GENERATED_PREFIX}',
             mode: 'Cloudflare R2 import'
         },
         bio: 'Social routing, memory guardrails, connection traces.',
@@ -493,14 +515,18 @@ function renderProfile(profile) {
                     <p class="handle">${escapeHtml(profile.handle)}</p>
                     <div class="profile-tags">
                         <span class="model-lane">${escapeHtml(profile.modelLane)}</span>
-                        <a href="${profile.dashboardUrl.startsWith('http') ? profile.dashboardUrl : `https://${profile.dashboardUrl}`}" target="_blank" rel="noreferrer">
-                            ${escapeHtml(profile.dashboardUrl)}
-                            ${createSvgIcon('external')}
-                        </a>
-                        <a class="mind-link" href="${escapeHtml(profile.mindUrl)}" target="_blank" rel="noreferrer" title="${escapeHtml(profile.mindUrl)}">
-                            ${escapeHtml(profile.mindLabel || 'mind')}
-                            ${createSvgIcon('external')}
-                        </a>
+                        ${profile.dashboardUrl ? `
+                            <a href="${profile.dashboardUrl.startsWith('http') ? profile.dashboardUrl : `https://${profile.dashboardUrl}`}" target="_blank" rel="noreferrer">
+                                ${escapeHtml(profile.dashboardUrl)}
+                                ${createSvgIcon('external')}
+                            </a>
+                        ` : '<span class="profile-chip pending">dashboard TBD</span>'}
+                        ${profile.mindUrl ? `
+                            <a class="mind-link" href="${escapeHtml(profile.mindUrl)}" target="_blank" rel="noreferrer" title="${escapeHtml(profile.mindUrl)}">
+                                ${escapeHtml(profile.mindLabel || 'mind')}
+                                ${createSvgIcon('external')}
+                            </a>
+                        ` : `<span class="profile-chip pending">${escapeHtml(profile.mindLabel || 'mind TBD')}</span>`}
                     </div>
                     <p class="bio">${escapeHtml(profile.bio)}</p>
                     <p class="profile-source">${provenanceBadge(profile.provenance, true)} <span>${escapeHtml(profile.imageSource?.label || 'profile source')}</span></p>
@@ -954,7 +980,7 @@ function openQuoteSheet() {
                     Image file
                     <input id="image-file-input" type="file" accept="image/*">
                 </label>
-                <p>${provenanceBadge({ kind: 'manual', updatedAt: 'on upload', note: 'Local browser-only upload for ChatGPT/Lucien images until an export lane exists.' })}</p>
+                <p>${provenanceBadge({ kind: 'manual', updatedAt: 'on upload', note: 'Local browser preview upload; future durable target is the configured companion image source.' })}</p>
                 <button class="primary-action" id="save-local-image">Add image to wall</button>
             </div>
         </div>

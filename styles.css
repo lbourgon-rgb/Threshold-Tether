@@ -360,7 +360,8 @@ button {
 }
 
 .model-lane,
-.profile-tags a {
+.profile-tags a,
+.profile-chip {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -384,6 +385,11 @@ button {
 .profile-tags .icon {
     width: 14px;
     height: 14px;
+}
+
+.profile-chip.pending {
+    color: var(--muted);
+    border-style: dashed;
 }
 
 .bio {
