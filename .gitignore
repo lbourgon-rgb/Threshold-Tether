@@ -19,3 +19,8 @@ desktop.ini
 .vscode/
 *.swp
 *~
+
+# Generated iOS project/build artifacts
+Velarium-iOS/*.xcodeproj/
+Velarium-iOS/build/
+Velarium-iOS/DerivedData/

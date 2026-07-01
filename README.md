@@ -36,6 +36,30 @@ Deploy from a clean temp asset bundle so `.env.local`, design notes, and git met
 .\scripts\deploy-worker-assets.ps1
 ```
 
+## Native iOS App
+
+Velarium now has a native SwiftUI scaffold under `Velarium-iOS/`.
+
+- App name: `Velarium`
+- Bundle ID: `com.velastrae.velarium`
+- Project generator: XcodeGen via `Velarium-iOS/project.yml`
+- Cloud build file: `codemagic.yaml` at the repo root
+- First Codemagic workflow: `velarium-ios-simulator`
+- TestFlight workflow: `velarium-ios-testflight`
+
+The simulator workflow validates the native project without Apple signing. The TestFlight workflow archives and uploads an internal TestFlight build using the Codemagic App Store Connect integration named `Velarium Codemagic`.
+
+No Apple private keys, `.p8` files, certificates, provisioning profiles, D1 IDs, or backend tokens are committed.
+
+If the Codemagic App Store Connect integration has a different name, update this line in `codemagic.yaml`:
+
+```yaml
+integrations:
+  app_store_connect: Velarium Codemagic
+```
+
+Before running the TestFlight workflow, Codemagic must have matching iOS signing identities for `com.velastrae.velarium` with the Sign in with Apple capability enabled on the Apple App ID.
+
 ## Current Prototype
 
 - Vel landing profile is the home screen.
