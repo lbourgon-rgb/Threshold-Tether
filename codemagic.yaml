@@ -72,6 +72,9 @@ workflows:
           test -f "$XCODE_PROJECT_ROOT/Velarium/Resources/AppIcon60x60@3x.png"
           sips -g pixelWidth -g pixelHeight "$XCODE_PROJECT_ROOT/Velarium/Resources/AppIcon60x60@2x.png" | grep -q "pixelWidth: 120"
           sips -g pixelWidth -g pixelHeight "$XCODE_PROJECT_ROOT/Velarium/Resources/AppIcon60x60@2x.png" | grep -q "pixelHeight: 120"
+          grep -q "Assets.xcassets" "$XCODE_PROJECT_ROOT/$XCODE_PROJECT/project.pbxproj"
+          grep -q "AppIcon60x60@2x.png" "$XCODE_PROJECT_ROOT/$XCODE_PROJECT/project.pbxproj"
+          grep -q "Gallery" "$XCODE_PROJECT_ROOT/$XCODE_PROJECT/project.pbxproj"
       - name: Apply App Store signing profiles
         script: |
           cd "$XCODE_PROJECT_ROOT"
@@ -94,6 +97,7 @@ workflows:
           test -f "$APP_BUNDLE/Assets.car"
           test -f "$APP_BUNDLE/AppIcon60x60@2x.png"
           test -f "$APP_BUNDLE/AppIcon60x60@3x.png"
+          test -d "$APP_BUNDLE/Gallery"
           ICON_LIST="build/ios/ipa-icon-files.txt"
           find "$APP_BUNDLE" -maxdepth 2 -type f | sort | tee "$ICON_LIST"
           assetutil --info "$APP_BUNDLE/Assets.car" > build/ios/assets-car-info.json || true

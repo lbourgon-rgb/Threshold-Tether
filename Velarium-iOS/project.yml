@@ -20,10 +20,27 @@ targets:
           - Resources
           - Assets.xcassets
           - Preview Content
-    resources:
-      - path: Velarium/Resources
       - path: Velarium/Assets.xcassets
-      - path: Velarium/Preview Content
+        buildPhase: resources
+      - path: Velarium/Resources/Gallery
+        type: folder
+        buildPhase: resources
+      - path: Velarium/Resources/AppIcon20x20@2x.png
+        buildPhase: resources
+      - path: Velarium/Resources/AppIcon20x20@3x.png
+        buildPhase: resources
+      - path: Velarium/Resources/AppIcon29x29@2x.png
+        buildPhase: resources
+      - path: Velarium/Resources/AppIcon29x29@3x.png
+        buildPhase: resources
+      - path: Velarium/Resources/AppIcon40x40@2x.png
+        buildPhase: resources
+      - path: Velarium/Resources/AppIcon40x40@3x.png
+        buildPhase: resources
+      - path: Velarium/Resources/AppIcon60x60@2x.png
+        buildPhase: resources
+      - path: Velarium/Resources/AppIcon60x60@3x.png
+        buildPhase: resources
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.velastrae.velarium
