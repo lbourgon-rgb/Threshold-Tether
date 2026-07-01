@@ -82,13 +82,17 @@ workflows:
           mkdir -p build/ios/ipa-inspect
           unzip -q build/ios/ipa/Velarium.ipa -d build/ios/ipa-inspect
           INFO_PLIST="$(find build/ios/ipa-inspect/Payload -name Info.plist | head -n 1)"
-          /usr/libexec/PlistBuddy -c "Print :CFBundleIconName" "$INFO_PLIST"
+          APP_BUNDLE="$(find build/ios/ipa-inspect/Payload -maxdepth 1 -name "*.app" -type d | head -n 1)"
+          /usr/libexec/PlistBuddy -c "Print :CFBundleIconName" "$INFO_PLIST" | grep -q "AppIcon"
+          /usr/libexec/PlistBuddy -c "Print :CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconName" "$INFO_PLIST" | grep -q "AppIcon"
+          test -f "$APP_BUNDLE/Assets.car"
           ICON_LIST="build/ios/ipa-icon-files.txt"
-          find build/ios/ipa-inspect/Payload -type f \( -name "*120*.png" -o -name "AppIcon*.png" \) | tee "$ICON_LIST"
-          grep -E "(AppIcon60x60@2x|AppIcon40x40@3x|120.*\.png)" "$ICON_LIST"
+          find "$APP_BUNDLE" -maxdepth 1 -type f | sort | tee "$ICON_LIST"
+          assetutil --info "$APP_BUNDLE/Assets.car" > build/ios/assets-car-info.json || true
     artifacts:
       - Velarium-iOS/build/ios/ipa/*.ipa
       - Velarium-iOS/build/ios/ipa-icon-files.txt
+      - Velarium-iOS/build/ios/assets-car-info.json
       - Velarium-iOS/build/ios/xcarchive/*.xcarchive
       - /tmp/xcodebuild_logs/*.log
     publishing:
