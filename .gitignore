@@ -24,3 +24,7 @@ desktop.ini
 Velarium-iOS/*.xcodeproj/
 Velarium-iOS/build/
 Velarium-iOS/DerivedData/
+
+# Local signing helpers/secrets
+.velarium-local/
+ios_distribution_private_key*

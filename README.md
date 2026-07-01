@@ -62,6 +62,14 @@ integrations:
 
 Before running the TestFlight workflow, Codemagic must have matching iOS signing identities for `com.velastrae.velarium` with the Sign in with Apple capability enabled on the Apple App ID.
 
+The TestFlight workflow uses Codemagic automatic signing. Add a protected environment group named `velarium-code-signing` containing:
+
+- `CERTIFICATE_PRIVATE_KEY`: the RSA private key Codemagic uses to create or match the Apple Distribution certificate.
+
+Do not commit this key. Keep it only in Codemagic secrets and an ignored local backup if needed.
+
+An ignored helper script exists at `scripts/create-ios-distribution-private-key.ps1` to create `.velarium-local/ios_distribution_private_key` when you are ready to add the Codemagic secret.
+
 ## Current Prototype
 
 - Vel landing profile is the home screen.
